@@ -4,10 +4,15 @@
   {% if currentUser %}
     <p align="right">Welcome, <a href="profile">{{ currentUser.friendlyName }}</a>! <a href="logout">Log Out</a></p>
 
+
+    {#Dear 17/10/17 Jordan. Get help here with finding relevent CV and
+    Assigning a cv to a person#}
+
+
     <h1>Profile</h1>
     <h2><a href="">Your CV</a></h2>
     <h2>Update Information</h2>
-    <a href="profile/change-password.twig">Change Password</a>
+    <a href="profile/change-password">Change Password</a>
 
   {% else %}
     <h1>Oops</h1>
