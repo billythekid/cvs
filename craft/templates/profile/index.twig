@@ -1,0 +1,22 @@
+{% extends '_layout' %}
+
+{% block content %}
+  {% if currentUser %}
+    <p align="right">Welcome, <a href="profile">{{ currentUser.friendlyName }}</a>! <a href="logout">Log Out</a></p>
+
+    <h1>Profile</h1>
+    <h2><a href="">Your CV</a></h2>
+    <h2>Update Information</h2>
+    <a href="profile/change-password.twig">Change Password</a>
+
+  {% else %}
+    <h1>Oops</h1>
+    <p>You aren't logged in so you dont have access to this page</p>
+    <p>I'll give you 3 options here</p>
+    <ul>
+      <li><a href="../">Go back to homepage</a></li>
+      <li><a href="login">Log In</a></li>
+      <li><a href="register">Register</a></li>
+    </ul>
+  {% endif %}
+{% endblock %}

@@ -1,9 +1,21 @@
 {% extends '_layout' %}
 
 {% block content %}
+  {% if currentUser %}
+    <p align="right">Welcome, <a href="profile">{{ currentUser.friendlyName }}</a>! <a href="logout">Log Out</a></p>
+
+  {% else %}
+    <p align="right">
+      <a href="login">Log In</a>
+      <a href="register">Register</a>
+    </p>
+  {% endif %}
+
+  <h1>Homepage</h1>
+  <h2>Example CV's</h2>
   <ul>
-  {% for cv in craft.entries.section('cvs') %}
-    <li><a href="{{ cv.url }}">{{ cv.title }}</a></li>
-  {% endfor %}
+    {% for cv in craft.entries.section('cvs') %}
+      <li><a href="{{ cv.url }}">{{ cv.title }}</a></li>
+    {% endfor %}
   </ul>
 {% endblock %}
