@@ -1,0 +1,53 @@
+{% extends '_layout' %}
+
+{% block content %}
+  <h1 class="center">{{ entry.title }}</h1>
+  <address class="center">{{ entry.address }}</address>
+
+  <p>
+    {% if entry.mobile|length > 0 %}
+      Mobile: {{ entry.mobile }}
+    {% endif %}
+    <span class="right">{{ entry.email }}</span>
+  </p>
+
+  {% if entry.personalStatement|length >0 %}
+    <h2>Personal Statement</h2>
+    {{ entry.personalStatement }}
+  {% endif %}
+
+  {% if entry.education|length >0 %}
+    <h2>Education</h2>
+
+    <p><strong>{{ entry.education }}</strong>{{ entry.educationYears }}</p>
+
+    {% for block in entry.qualifications %}
+      <p><strong>{{ block.listTitle }}</strong></p>
+      <ul>
+        {% for list in block.list %}
+          <li>{{ list.subject }} - {{ list.grade }}</li>
+        {% endfor %}
+      </ul>
+    {% endfor %}
+  {% endif %}
+
+  {% if entry.workExperience|length >0 %}
+    <h2>Work Experience</h2>
+
+
+    {% for block in entry.workExperience %}
+      <p><strong>{{ block.employer }}</strong> {{ block.date }}</p>
+      <p>{{ block.description }}</p>
+    {% endfor %}
+  {% endif %}
+
+  {% if entry.interests|length >0 %}
+    <h2>Interests</h2>
+
+    <ul>
+      {% for row in entry.interests %}
+        <li>{{ row.interests }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endblock %}
