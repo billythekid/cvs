@@ -1,0 +1,81 @@
+{% macro errorList(errors) %}
+  {% if errors %}
+    <ul class="errors">
+      {% for error in errors %}
+        <li>{{ error }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endmacro %}
+
+  {% from _self import errorList %}
+
+<form method="post" accept-charset="UTF-8">
+  {{ getCsrfInput() }}
+  <input type="hidden" name="action" value="entries/saveEntry">
+  <input type="hidden" name="redirect" value="{slug}">
+  <input type="hidden" name="sectionId" value="3">
+  <input type="hidden" name="enabled" value="1">
+
+  <div class="left pad-m">
+    <label for="title">Title</label>
+    <input id="title" type="text" name="title" placeholder="eg: 'Joe Bloggs' or 'Joe Bloggs Art CV'" {%- if entry is defined %} value="{{ entry.title }}"{% endif -%}>
+
+    {% if entry is defined %}
+      {{ errorList(entry.getErrors('title')) }}
+    {% endif %}
+  </div>
+
+  <div class="left pad-m">
+    <label for="address">Address</label>
+    <input id="address" name="address" placeholder="Your home address" value="{{ entry.address }}">
+    {% if entry is defined %}
+      {{ errorList(entry.getErrors('address')) }}
+    {% endif %}
+  </div>
+
+  <div class="left pad-m">
+    <label for="email">E-mail</label>
+    <input id="email" name="email" placeholder="example@example.com" value="{{ entry.email }}">
+    {% if entry is defined %}
+      {{ errorList(entry.getErrors('email')) }}
+    {% endif %}
+  </div>
+
+  <div class="left pad-m">
+    <label for="mobile">Contact Number</label>
+    <input id="mobile" name="mobile" placeholder="07700 900077" value="{{ entry.mobile }}">
+    {% if entry is defined %}
+      {{ errorList(entry.getErrors('mobile')) }}
+    {% endif %}
+  </div>
+
+  <div class="left v-middle pad-m">
+    <label for="personalStatement">Personal Statement</label>
+    <textarea id="personalStatement" name="fields[personalStatement]" rows="5" placeholder="Write a little bit about yourself">
+        {%- if entry is defined %}{{ entry.personalStatement }}{% endif -%}
+  </textarea>
+
+    {% if entry is defined %}
+      {{ errorList(entry.getErrors('personalStatement')) }}
+    {% endif %}
+  </div>
+
+  <div class="left pad-m">
+    <label for="education">Place of Education</label>
+    <input id="education" name="education" placeholder="Bucksburn Academy" value="{{ entry.education }}">
+    {% if entry is defined %}
+      {{ errorList(entry.getErrors('education')) }}
+    {% endif %}
+  </div>
+
+  <div class="left pad-m">
+    <label for="educationYears">Years in Education</label>
+    <input id="educationYears" name="educationYears" placeholder="2008-2014" value="{{ entry.educationYears }}">
+    {% if entry is defined %}
+      {{ errorList(entry.getErrors('educationYears')) }}
+    {% endif %}
+  </div>
+
+  <input type="submit" value="Publish">
+</form>

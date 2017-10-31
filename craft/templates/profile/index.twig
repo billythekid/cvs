@@ -5,18 +5,31 @@
     <p align="right">Welcome, <a href="profile">{{ currentUser.friendlyName }}</a>! <a href="logout">Log Out</a></p>
 
 
-    {#Dear 17/10/17 Jordan. Get help here with finding relevent CV and
+    {#Dear future Jordan. Get help here with finding relevent CV and
     Assigning a cv to a person#}
 
 
     <h1>Profile</h1>
-    <h2><a href="">Your CV</a></h2>
+
+    {% set cvs = craft.entries.section('cvs').authorId(currentUser.id) %}
+
+    {% if cvs is empty %}
+      <h2>Create your first CV</h2>
+      {% include 'profile/_add-cv' %}
+    {% else %}
+      <ul>
+        {% for cv in cvs %}
+          <li><a href="{{ cv.url }}">{{ cv.title }}</a></li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
     <h2>Update Information</h2>
     <a href="profile/change-password">Change Password</a>
 
   {% else %}
     <h1>Oops</h1>
-    <p>You aren't logged in so you dont have access to this page</p>
+    <p>You aren't logged in so you don't have access to this page</p>
     <p>I'll give you 3 options here</p>
     <ul>
       <li><a href="../">Go back to homepage</a></li>
