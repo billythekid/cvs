@@ -2,6 +2,7 @@
 
 // Path to your craft/ folder
 $craftPath = '/home/eqdev/sites/god/craft';
+define('CRAFT_BASE_PATH', '../craft/');
 
 // Do not edit below this line
 $path = rtrim($craftPath, '/').'/app/index.php';
