@@ -10,7 +10,7 @@
 
   {% from _self import errorList %}
 
-<form method="post" accept-charset="UTF-8">
+<form method="post" accept-charset="UTF-8" id="cv-form">
   {{ getCsrfInput() }}
   <input type="hidden" name="action" value="entries/saveEntry">
   <input type="hidden" name="redirect" value="{slug}">
@@ -18,7 +18,7 @@
   <input type="hidden" name="enabled" value="1">
 
   <div class="left pad-m">
-    <label for="title">Title</label>
+    <label for="title">Title <span class="required">*</span></label>
     <input id="title" type="text" name="title" placeholder="eg: 'Joe Bloggs' or 'Joe Bloggs Art CV'" {%- if entry is defined %} value="{{ entry.title }}"{% endif -%}>
 
     {% if entry is defined %}
@@ -28,7 +28,7 @@
 
   <div class="left pad-m">
     <label for="address">Address</label>
-    <input id="address" name="address" placeholder="Your home address" value="{{ entry.address }}">
+    <input id="address" name="fields[address]" placeholder="Your home address" value="{{ entry.address??"" }}">
     {% if entry is defined %}
       {{ errorList(entry.getErrors('address')) }}
     {% endif %}
@@ -36,7 +36,7 @@
 
   <div class="left pad-m">
     <label for="email">E-mail</label>
-    <input id="email" name="email" placeholder="example@example.com" value="{{ entry.email }}">
+    <input id="email" name="fields[email]" placeholder="example@example.com" value="{{ entry.email??"" }}">
     {% if entry is defined %}
       {{ errorList(entry.getErrors('email')) }}
     {% endif %}
@@ -44,7 +44,7 @@
 
   <div class="left pad-m">
     <label for="mobile">Contact Number</label>
-    <input id="mobile" name="mobile" placeholder="07700 900077" value="{{ entry.mobile }}">
+    <input id="mobile" name="fields[mobile]" placeholder="07700 900077" value="{{ entry.mobile??"" }}">
     {% if entry is defined %}
       {{ errorList(entry.getErrors('mobile')) }}
     {% endif %}
@@ -63,7 +63,7 @@
 
   <div class="left pad-m">
     <label for="education">Place of Education</label>
-    <input id="education" name="education" placeholder="Bucksburn Academy" value="{{ entry.education }}">
+    <input id="education" name="fields[education]" placeholder="Bucksburn Academy" value="{{ entry.education??"" }}">
     {% if entry is defined %}
       {{ errorList(entry.getErrors('education')) }}
     {% endif %}
@@ -71,11 +71,152 @@
 
   <div class="left pad-m">
     <label for="educationYears">Years in Education</label>
-    <input id="educationYears" name="educationYears" placeholder="2008-2014" value="{{ entry.educationYears }}">
+    <input id="educationYears" name="fields[educationYears]" placeholder="2008-2014" value="{{ entry.educationYears??"" }}">
     {% if entry is defined %}
       {{ errorList(entry.getErrors('educationYears')) }}
     {% endif %}
   </div>
 
+  <div class="left pad-m">
+    <h3>Qualifications</h3>
+    <div v-for="(item, index) in qualifications" :key="item.id">
+      <input type="hidden" :name="'fields[qualifications][' + index + '][type]'" value="list">
+      <input type="hidden" :name="'fields[qualifications][' + index + '][enabled]'" value="1">
+      <label for="'level' + index">Level</label>
+      <input id="'level' + index" :name="'fields[qualifications][' + index + '][fields][listTitle]'" v-model="item.listTitle">
+
+      <div v-for="(row,listIndex) in item.list" class="nested">
+        <label :for="'subject'+ listIndex">Subject</label>
+        <input :id="'subject'+ listIndex" type="text" v-model="row.subject" :name="'fields[qualifications][' + index + '][fields][list]['+ listIndex + '][col1]'">
+        <label :for="'grade'+ listIndex">Grade</label>
+        <input :id="'grade'+ listIndex" type="text" v-model="row.grade" :name="'fields[qualifications][' + index + '][fields][list]['+ listIndex + '][col2]'">
+      </div>
+      <button v-on:click.prevent="addSubject(index)">Add Subject</button>
+
+    </div>
+    <button v-on:click.prevent="addQualification">Add Qualification</button>
+
+    {% if entry is defined %}
+      {{ errorList(entry.getErrors('educationYears')) }}
+    {% endif %}
+  </div>
+
+  <div class="left pad-m">
+    <h3>Work Experience</h3>
+    <div v-for="(item, index) in workExperience" :key="item.id">
+      <input type="hidden" :name="'fields[workExperience]['+'new' + index + '][type]'" value="workExperience">
+      <input type="hidden" :name="'fields[workExperience]['+'new' + index + '][enabled]'" value="1">
+      <label for="'new' + index + 'employer'">Employer</label>
+      <input id="'new' + index + 'employer'" :name="'fields[workExperience]['+'new' + index + '][fields][employer]'" v-model="item.employer">
+      <label for="'new' + index + 'date'">Date</label>
+      <input id="'new' + index + 'date'" :name="'fields[workExperience]['+'new' + index + '][fields][date]'" v-model="item.date">
+      <label for="'new' + index + 'description'">Description</label>
+      <input id="'new' + index + 'description'" :name="'fields[workExperience]['+'new' + index + '][fields][description]'" v-model="item.description">
+    </div>
+    <button v-on:click.prevent="addWorkExperience">Add Work Experience</button>
+
+    {% if entry is defined %}
+      {{ errorList(entry.getErrors('educationYears')) }}
+    {% endif %}
+  </div>
+
+  <div class="left pad-m">
+    <h3>Interests</h3>
+    <input v-for="(interest,index) in interests" :name="'fields[interests]['+ index + '][col1]'" v-model="interest.interests">
+    <button v-on:click.prevent="addInterest">Add Interest</button>
+
+  </div>
+
+  <div class="left pad-m">
+    <p><span class="required">* Required</span></p>
+  </div>
+
   <input type="submit" value="Publish">
 </form>
+
+{% includeJsFile url('assets/js/vue.js') %}
+<script>
+  {% set formJs %}
+  var form = new Vue({
+      el: '#cv-form',
+      data: {
+          workExperience: [
+            {% if entry is defined %}
+            {% for experience in entry.workExperience %}
+              {
+                  employer: '{{ experience.employer }}',
+                  date: '{{ experience.date }}',
+                  description: '{{ experience.description }}'
+              },
+            {% endfor %}
+            {% endif %}
+          ],
+          interests: [
+//              check if entry exists
+              // loop entry.interests
+            {% if entry is defined %}
+            {% for interest in entry.interests %}
+              {
+                  interests: '{{ interest.interests }}'
+              },
+            {% endfor %}
+            {% endif %}
+
+          ],
+          qualifications: [
+            {% if entry is defined %}
+            {% for qualification in entry.qualifications %}
+              {
+                  listTitle: '{{ qualification.listTitle }}',
+                  list: [
+                    {% for row in qualification.list %}
+                      {
+                          subject: '{{ row.subject }}',
+                          grade: '{{ row.grade }}'
+                      },
+                    {% endfor %}
+
+                  ]
+              },
+            {% endfor %}
+            {% endif %}
+          ],
+      },
+      methods: {
+          addWorkExperience: function () {
+              this.workExperience.push(
+                  {
+                      employer: '',
+                      date: '',
+                      description: ''
+                  }
+              );
+          },
+          addInterest: function () {
+              this.interests.push(
+                  {
+                      interests: ""
+                  }
+              );
+          },
+          addQualification: function () {
+              this.qualifications.push(
+                  {
+                      listTitle: '',
+                      list: []
+                  }
+              );
+          },
+          addSubject: function (qualificationIndex) {
+              this.qualifications[qualificationIndex].list.push(
+                  {
+                      subject: '',
+                      grade: ''
+                  }
+              );
+          }
+      }
+  });
+  {% endset %}
+  {% includeJs formJs %}
+</script>

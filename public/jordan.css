@@ -38,9 +38,27 @@ h2 {
   padding: 0.5rem 0;
 }
 
-input, textarea{
+input, textarea {
   width: 100%;
   font-size: 1rem;
 }
 
+.errors {
+  color: #cc0000;
+  list-style-type: none;
+}
 
+.required {
+  color: blue;
+}
+
+.nested {
+  padding-left: 2rem;
+}
+
+.nested input {
+  display: inline-block;
+  width: 38%;
+  margin: 0;
+  padding: 0;
+}

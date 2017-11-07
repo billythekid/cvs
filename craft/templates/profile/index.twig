@@ -1,4 +1,5 @@
 {% extends '_layout' %}
+{% set title = 'Your Profile' %}
 
 {% block content %}
   {% if currentUser %}
@@ -13,15 +14,21 @@
 
     {% set cvs = craft.entries.section('cvs').authorId(currentUser.id) %}
 
+
     {% if cvs is empty %}
       <h2>Create your first CV</h2>
-      {% include 'profile/_add-cv' %}
     {% else %}
+      <h2>Your Cvs</h2>
       <ul>
         {% for cv in cvs %}
           <li><a href="{{ cv.url }}">{{ cv.title }}</a></li>
         {% endfor %}
       </ul>
+    {% endif %}
+    {% if cvs|length < 5 %}
+      {% include 'profile/_add-cv' %}
+    {% else %}
+      <h2>You are only allowed 5 CV's<br>You have reached the limit.</h2>
     {% endif %}
 
     <h2>Update Information</h2>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>{{ entry is defined ? entry.title }}</title>
+  <title>{% if title is defined %}{{ title }}{% else %}{{  entry is defined ? entry.title}}{% endif %}</title>
   <link rel="stylesheet" href="{{ siteUrl }}jordan.css">
   <meta charset="utf-8"/>
 </head>

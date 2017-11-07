@@ -17,10 +17,10 @@
     {{ entry.personalStatement }}
   {% endif %}
 
-  {% if entry.education|length >0 %}
+  {% if entry.education is not empty or entry.qualifications is not empty %}
     <h2>Education</h2>
 
-    <p><strong>{{ entry.education }}</strong>{{ entry.educationYears }}</p>
+    <p><strong>{{ entry.education }}</strong> {{ entry.educationYears }}</p>
 
     {% for block in entry.qualifications %}
       <p><strong>{{ block.listTitle }}</strong></p>
@@ -36,7 +36,7 @@
     <h2>Work Experience</h2>
 
 
-    {% for block in entry.workExperience %}
+    {% for block in entry.workExperience if block.employer ~ block.date ~ block.description is not empty%}
       <p><strong>{{ block.employer }}</strong> {{ block.date }}</p>
       <p>{{ block.description }}</p>
     {% endfor %}
