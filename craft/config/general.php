@@ -8,12 +8,14 @@
 $protocol = (empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] == "off") ? 'http:' : 'https:';
 $siteUrl  = $protocol . '//' . $_SERVER['HTTP_HOST'] . '/';
 return array(
-    'siteUrl'              => $siteUrl,
-    'environmentVariables' => array(),
-    'defaultWeekStartDay'  => 0,
-    'enableCsrfProtection' => true,
-    'omitScriptNameInUrls' => true,
-    'cpTrigger'            => 'admin',
-    'devMode'              => false,
-    'loginPath'            => 'members/login',
+    '*' => [
+        'siteUrl'              => $siteUrl,
+        'environmentVariables' => array(),
+        'defaultWeekStartDay'  => 0,
+        'enableCsrfProtection' => true,
+        'omitScriptNameInUrls' => true,
+        'cpTrigger'            => 'admin',
+        'devMode'              => false,
+        'loginPath'            => 'members/login',
+    ],
 );
