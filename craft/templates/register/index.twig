@@ -40,11 +40,11 @@
 
     <h3><label for="firstName">First Name</label></h3>
     <input id="firstName" type="text" name="firstName"
-        {%- if account is defined %} value="{{ account.forename }}"{% endif %}>
+        {%- if account is defined %} value="{{ account.firstName }}"{% endif %}>
 
     <h3><label for="lastName">Last Name</label></h3>
     <input id="lastName" type="text" name="lastName"
-        {%- if account is defined %} value="{{ account.surname }}"{% endif %}>
+        {%- if account is defined %} value="{{ account.lastName }}"{% endif %}>
 
     <h3><label for="password">Password*</label></h3>
     <input id="password" type="password" name="password">
