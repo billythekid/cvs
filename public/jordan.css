@@ -64,5 +64,6 @@ input, textarea {
 }
 
 .not-logged-in {
+  padding-top: 13px;
   font-size: 1.2rem
 }
