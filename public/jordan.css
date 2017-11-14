@@ -38,8 +38,9 @@ h2 {
   padding: 0.5rem;
 }
 
-.mar-b {
-  margin-bottom: 1rem;
+.pad-t-b {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 
 input:not([type=checkbox]), textarea {
@@ -65,9 +66,4 @@ input:not([type=checkbox]), textarea {
   width: 38%;
   margin: 0;
   padding: 0;
-}
-
-.not-logged-in {
-  padding-top: 13px;
-  font-size: 1.2rem
 }
