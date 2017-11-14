@@ -2,7 +2,7 @@
 
 {% block content %}
   {% if currentUser %}
-    <p align="right">Welcome, <a href="profile">{{ currentUser.friendlyName }}</a>! <a href="logout">Log Out</a></p>
+    <p><a href="./">Home</a><span class="right">Welcome, <a href="./">{{ currentUser.friendlyName }}</a>! <a href="{{ logoutUrl }}">Logout</a></span></p>
 
   {% else %}
     <p align="right">
