@@ -38,6 +38,10 @@ h2 {
   padding: 0.5rem;
 }
 
+.mar-b {
+  margin-bottom: 1rem;
+}
+
 input, textarea {
   width: 100%;
   font-size: 1rem;
