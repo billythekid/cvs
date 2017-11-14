@@ -42,7 +42,7 @@ h2 {
   margin-bottom: 1rem;
 }
 
-input, textarea {
+input:not([type=checkbox]), textarea {
   width: 100%;
   font-size: 1rem;
 }
