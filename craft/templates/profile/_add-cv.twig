@@ -131,13 +131,13 @@
     <p><span class="required">* Required</span></p>
   </div>
 
-  <input type="submit" value="Publish">
+  <input class="button" type="submit" value="Publish">
 </form>
 
 {% includeJsFile url('assets/js/vue.js') %}
 <script>
   {% set formJs %}
-  var form = new Vue({
+  new Vue({
       el: '#cv-form',
       data: {
           workExperience: [

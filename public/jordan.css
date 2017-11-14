@@ -14,6 +14,10 @@ body {
   background-color: white;
 }
 
+body * {
+  box-sizing: border-box;
+}
+
 h2 {
   font-size: 1.2rem
 }
@@ -44,13 +48,21 @@ h2 {
 }
 
 .mar-t-b {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 input:not([type=checkbox]), textarea {
   width: 100%;
   font-size: 1rem;
+}
+
+.button {
+  padding: 0.25rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  border-radius: 8px;
+  -moz-border-radius: 8px;
 }
 
 .errors {

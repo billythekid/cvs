@@ -4,7 +4,7 @@
 {% block content %}
   <p><a href="./">Home</a></p>
   <h1 align="center">Register</h1>
-  <p>Already have an account? <a href="login">Log In</a></p>
+  <p>Already have an account? <a href="../login">Log In</a></p>
   <form method="post" accept-charset="UTF-8">
     {{ getCsrfInput() }}
     <input type="hidden" name="action" value="users/saveUser">
@@ -51,6 +51,6 @@
 
     <p>*Required</p>
 
-    <input type="submit" value="Register">
+    <input class="mar-t-b button" type="submit" value="Register">
   </form>
 {% endblock %}
