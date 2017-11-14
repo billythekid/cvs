@@ -1,7 +1,7 @@
 {% extends '_layout' %}
 
 {% block content %}
-  <p><a href="./">Home</a><span class="right">Welcome, <a href="./">{{ currentUser.friendlyName }}</a>! <a href="{{ logoutUrl }}">Logout</a></span></p>
+  <p><a href="./">Home</a><span class="right">Welcome, <a href="../profile">{{ currentUser.friendlyName }}</a>! <a href="{{ logoutUrl }}">Logout</a></span></p>
   <h1 class="center">{{ entry.title }}</h1>
   <address class="center">{{ entry.address }}</address>
 
