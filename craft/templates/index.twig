@@ -4,6 +4,14 @@
   {% if currentUser %}
     <p><span class="right">Welcome, <a href="profile">{{ currentUser.friendlyName }}</a>! <a href="{{ logoutUrl }}">Logout</a></span></p>
 
+    <h1>Homepage</h1>
+    <h2>Read people's CVs</h2>
+    <ul>
+      {% for cv in craft.entries.section('cvs') %}
+        <li><a href="{{ cv.url }}">{{ cv.title }}</a></li>
+      {% endfor %}
+    </ul>
+
   {% else %}
     <p align="right">
       <a href="login">Log In</a>
@@ -11,11 +19,6 @@
     </p>
   {% endif %}
 
-  <h1>Homepage</h1>
-  <h2>Read people's CVs</h2>
-  <ul>
-    {% for cv in craft.entries.section('cvs') %}
-      <li><a href="{{ cv.url }}">{{ cv.title }}</a></li>
-    {% endfor %}
-  </ul>
+  <h1>You need to be logged in to read people's CVs</h1>
+
 {% endblock %}
