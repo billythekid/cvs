@@ -4,7 +4,7 @@
 {% block content %}
   <p><a href="./">Home</a></p>
   <h1 align="center">Login</h1>
-  <p>Don't have an account? <a href="register">Create an Account</a></p>
+  <p>Don't have an account? <a href="../register">Create an Account</a></p>
   <form method="post" accept-charset="UTF-8">
     {{ getCsrfInput() }}
     <input type="hidden" name="action" value="users/login">
@@ -28,5 +28,5 @@
     {% endif %}
   </form>
 
-  <p><a href="{{ url('forgotpassword') }}">Forgot your password?</a></p>
+  <p><a href="{{ url('forgotPassword') }}">Forgot your password?</a></p>
 {% endblock %}
