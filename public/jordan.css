@@ -84,3 +84,7 @@ input:not([type=checkbox]), textarea {
   margin: 0;
   padding: 0;
 }
+
+.not-logged-in {
+  font-size: 1.6rem
+}
