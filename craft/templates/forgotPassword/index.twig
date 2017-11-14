@@ -1,8 +1,9 @@
 {% extends "_layout" %}
+{% set title = 'Forgot Password' %}
 
 {% block content %}
   <p><a href="./">Home</a></p>
-  <h1 align="center">Forgot Password?</h1>
+  <h1 align="center">Forgot Password?</h1><br>
   <form method="post" accept-charset="UTF-8">
     {{ getCsrfInput() }}
     <input type="hidden" name="action" value="users/sendPasswordResetEmail">
