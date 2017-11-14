@@ -2,9 +2,9 @@
 {% set title = 'Login' %}
 
 {% block content %}
-  <p><a href="./">Home</a></p>
+  <p><a href="{{ siteUrl }}">Home</a></p>
   <h1 align="center">Login</h1>
-  <p>Don't have an account? <a href="../register">Create an Account</a></p>
+  <p>Don't have an account? <a href="{{ url('register') }}">Create an Account</a></p>
   <form method="post" accept-charset="UTF-8">
     {{ getCsrfInput() }}
     <input type="hidden" name="action" value="users/login">

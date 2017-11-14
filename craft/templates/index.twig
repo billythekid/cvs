@@ -2,7 +2,7 @@
 
 {% block content %}
   {% if currentUser %}
-    <p><span class="right">Welcome, <a href="profile">{{ currentUser.friendlyName }}</a>! <a href="{{ logoutUrl }}">Logout</a></span></p>
+    <p><span class="right">Welcome, <a href="{{ url('profile') }}">{{ currentUser.friendlyName }}</a>! <a href="{{ logoutUrl }}">Logout</a></span></p>
 
     <h1>Homepage</h1>
     <h2>Read people's CVs</h2>
@@ -14,8 +14,8 @@
 
   {% else %}
     <p align="right">
-      <a href="login">Log In</a>
-      <a href="register">Register</a>
+      <a href={{ loginUrl }}>Log In</a>
+      <a href="{{ url('register') }}">Register</a>
     </p>
 
     <h1 class="not-logged-in">You need to be logged in to read people's CVs</h1>

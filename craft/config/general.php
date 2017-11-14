@@ -16,6 +16,6 @@ return array(
         'omitScriptNameInUrls' => true,
         'cpTrigger'            => 'admin',
         'devMode'              => false,
-        'loginPath'            => 'members/login',
+        'loginPath'            => 'login',
     ],
 );

@@ -2,7 +2,7 @@
 {% set title = 'Forgot Password' %}
 
 {% block content %}
-  <p><a href="./">Home</a></p>
+  <p><a href="{{ siteUrl }}">Home</a></p>
   <h1 align="center">Forgot Password?</h1>
   <form method="post" accept-charset="UTF-8">
     {{ getCsrfInput() }}
