@@ -7,7 +7,7 @@ body {
   margin: 0 auto;
   margin-top: 1rem;
   font-style: normal;
-  font-family: "Times New Roman";
+  font-family: "Times New Roman", serif;
   padding: 1rem;
   border: 1px solid gray;
   box-shadow: 0 0 5px silver;
@@ -61,4 +61,8 @@ input, textarea {
   width: 38%;
   margin: 0;
   padding: 0;
+}
+
+.not-logged-in {
+  font-size: 1.2rem
 }
