@@ -87,14 +87,14 @@
 
       <div v-for="(row,listIndex) in item.list" class="nested">
         <label :for="'subject'+ listIndex">Subject</label>
-        <input :id="'subject'+ listIndex" type="text" v-model="row.subject" :name="'fields[qualifications][' + index + '][fields][list]['+ listIndex + '][col1]'">
+        <input :id="'subject'+ listIndex" type="text" v-model="row.subject" :name="'fields[qualifications][' + index + '][fields][list]['+ listIndex + '][col1]'"><br>
         <label :for="'grade'+ listIndex">Grade</label>
         <input :id="'grade'+ listIndex" type="text" v-model="row.grade" :name="'fields[qualifications][' + index + '][fields][list]['+ listIndex + '][col2]'">
       </div>
-      <button v-on:click.prevent="addSubject(index)">Add Subject</button>
+      <button class="button" v-on:click.prevent="addSubject(index)">Add Subject</button>
 
     </div>
-    <button v-on:click.prevent="addQualification">Add Qualification</button>
+    <button class="button" v-on:click.prevent="addQualification">Add Qualification</button>
 
     {% if entry is defined %}
       {{ errorList(entry.getErrors('educationYears')) }}
@@ -103,17 +103,17 @@
 
   <div class="left pad-m">
     <h3>Work Experience</h3>
-    <div v-for="(item, index) in workExperience" :key="item.id">
+    <div class="mar-t-b" v-for="(item, index) in workExperience" :key="item.id">
       <input type="hidden" :name="'fields[workExperience]['+'new' + index + '][type]'" value="workExperience">
       <input type="hidden" :name="'fields[workExperience]['+'new' + index + '][enabled]'" value="1">
       <label for="'new' + index + 'employer'">Employer</label>
-      <input id="'new' + index + 'employer'" :name="'fields[workExperience]['+'new' + index + '][fields][employer]'" v-model="item.employer">
+      <input id="'new' + index + 'employer'" :name="'fields[workExperience]['+'new' + index + '][fields][employer]'" v-model="item.employer" placeholder="Company name">
       <label for="'new' + index + 'date'">Date</label>
-      <input id="'new' + index + 'date'" :name="'fields[workExperience]['+'new' + index + '][fields][date]'" v-model="item.date">
+      <input id="'new' + index + 'date'" :name="'fields[workExperience]['+'new' + index + '][fields][date]'" v-model="item.date" placeholder="10/05/2014 - 30/11/2016">
       <label for="'new' + index + 'description'">Description</label>
-      <input id="'new' + index + 'description'" :name="'fields[workExperience]['+'new' + index + '][fields][description]'" v-model="item.description">
+      <input id="'new' + index + 'description'" :name="'fields[workExperience]['+'new' + index + '][fields][description]'" v-model="item.description" placeholder="Summarise what you did and learned there">
     </div>
-    <button v-on:click.prevent="addWorkExperience">Add Work Experience</button>
+    <button class="button" v-on:click.prevent="addWorkExperience">Add Work Experience</button>
 
     {% if entry is defined %}
       {{ errorList(entry.getErrors('educationYears')) }}
@@ -123,7 +123,7 @@
   <div class="left pad-m">
     <h3>Interests</h3>
     <input v-for="(interest,index) in interests" :name="'fields[interests]['+ index + '][col1]'" v-model="interest.interests">
-    <button v-on:click.prevent="addInterest">Add Interest</button>
+    <button class="button" v-on:click.prevent="addInterest">Add Interest</button>
 
   </div>
 

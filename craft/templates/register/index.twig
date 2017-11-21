@@ -22,7 +22,7 @@
 
     {% from _self import errorList %}
 
-    <h3><label for="username">Username*</label></h3>
+    <h3><label for="username">Username<span class="required">*</span></label></h3>
     <input id="username" type="text" name="username"
         {%- if account is defined %} value="{{ account.username }}"{% endif -%}>
 
@@ -30,7 +30,7 @@
       {{ errorList(account.getErrors('username')) }}
     {% endif %}
 
-    <h3><label for="email">Email*</label></h3>
+    <h3><label for="email">Email<span class="required">*</span></label></h3>
     <input id="email" type="text" name="email"
         {%- if account is defined %} value="{{ account.email }}"{% endif %}>
 
@@ -46,7 +46,7 @@
     <input id="lastName" type="text" name="lastName"
         {%- if account is defined %} value="{{ account.lastName }}"{% endif %}>
 
-    <h3><label for="password">Password*</label></h3>
+    <h3><label for="password">Password<span class="required">*</span></label></h3>
     <input id="password" type="password" name="password">
 
     <p>*Required</p>
