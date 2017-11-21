@@ -131,6 +131,23 @@
     <p><span class="required">* Required</span></p>
   </div>
 
+  <div>
+    <h3>Industries</h3>
+    <p>Select all industries below you would like your CV to be listed under</p>
+    <select name="fields[industries][]" multiple>
+    {% for industry in craft.fields.getFieldByHandle("industries") %}
+      {% for options in industry %}
+        {% for option in options %}
+          <option value="{{ option.value }}" {% if entry is defined and option.value in entry.industries %}selected{% endif %}>{{ option.label }}</option>
+        {% endfor %}
+      {% endfor %}
+    {% endfor %}
+    </select>
+    {% if entry is defined %}
+      {{ errorList(entry.getErrors('industries')) }}
+    {% endif %}
+  </div>
+
   <input class="button" type="submit" value="Publish">
 </form>
 
@@ -217,6 +234,9 @@
           }
       }
   });
+
+  $("select[multiple]").select2();
+
   {% endset %}
   {% includeJs formJs %}
 </script>

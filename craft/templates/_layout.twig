@@ -4,14 +4,37 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>{% if title is defined %}{{ title }}{% else %}{{  entry is defined ? entry.title}}{% endif %}</title>
+  <title>{% if title is defined %}{{ title }}{% else %}{{ entry is defined ? entry.title }}{% endif %}</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
   <link rel="stylesheet" href="{{ siteUrl }}normalize.css">
-  <link rel="stylesheet" href="{{ siteUrl }}jordan.css">
+  <link rel="stylesheet" href="{{ siteUrl }}jordan.css?v={{ now.timestamp }}">
 </head>
 
 <body>
+  <div class="nav">
+    <p>
+      {% if entry is not defined or not entry.section.isHomepage() %}
+        <a href="{{ siteUrl }}">Home</a>
+        {% else %}
+        <a href="{{ url('search') }}">Search Categories</a>
+      {% endif %}
+
+      <span class="right">
+      {% if currentUser %}
+        Welcome,
+        <a href="{{ url('profile') }}">{{ currentUser.friendlyName }}</a>!
+          <a href="{{ logoutUrl }}">Logout</a>
+      {% else %}
+        <a href="{{ url('login') }}">Login</a>
+        <a href="{{ url('register') }}">Register</a>
+      {% endif %}
+        </span>
+    </p>
+  </div>
   {% block content %}
   {% endblock %}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 </body>
 </html>
 

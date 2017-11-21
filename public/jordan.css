@@ -33,9 +33,24 @@ h2 {
   vertical-align: middle;
 }
 
-.right {
-  float: right;
+.nav {
+  display: flex;
+  justify-content: flex-end;
 }
+
+
+.nav p {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 100%;
+}
+
+/*.right {*/
+/*display: inline-block;*/
+/*width:100%;*/
+/*text-align: right;*/
+/*}*/
 
 .pad-m {
   padding: 0.5rem;

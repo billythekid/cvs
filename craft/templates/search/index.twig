@@ -1,0 +1,8 @@
+{% extends "_layout" %}
+
+{% block content %}
+  <form action="{{ url('search/results') }}">
+    <input type="search" name="q" placeholder="Search">
+    <input type="submit" value="Go">
+  </form>
+{% endblock %}
