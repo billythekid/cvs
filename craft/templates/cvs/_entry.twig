@@ -1,7 +1,14 @@
 {% extends '_layout' %}
 
+{% requireLogin %}
+
 {% block content %}
-  <p><a href="{{ siteUrl }}">Home</a><span class="right">Welcome, <a href="{{ url('profile') }}">{{ currentUser.friendlyName }}</a>! <a href="{{ logoutUrl }}">Logout</a></span></p>
+  {% if currentUser and currentUser.id == entry.author.id %}
+    <div class="left">
+      <a href="{{ entry.url }}/edit">Edit This CV</a>
+    </div>
+  {% endif %}
+
   <h1 class="center">{{ entry.title }}</h1>
   <address class="center">{{ entry.address }}</address>
 
@@ -36,7 +43,7 @@
     <h2>Work Experience</h2>
 
 
-    {% for block in entry.workExperience if block.employer ~ block.date ~ block.description is not empty%}
+    {% for block in entry.workExperience if block.employer ~ block.date ~ block.description is not empty %}
       <p><strong>{{ block.employer }}</strong> {{ block.date }}</p>
       <p>{{ block.description }}</p>
     {% endfor %}

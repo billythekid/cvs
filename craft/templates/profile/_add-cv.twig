@@ -13,9 +13,8 @@
 <form method="post" accept-charset="UTF-8" id="cv-form">
   {{ getCsrfInput() }}
   <input type="hidden" name="action" value="entries/saveEntry">
-  <input type="hidden" name="redirect" value="{slug}">
+  <input type="hidden" name="redirect" value="thanks">
   <input type="hidden" name="sectionId" value="3">
-  <input type="hidden" name="enabled" value="1">
 
   <div class="left pad-m">
     <label for="title">Title <span class="required">*</span></label>
@@ -83,13 +82,13 @@
       <input type="hidden" :name="'fields[qualifications][' + index + '][type]'" value="list">
       <input type="hidden" :name="'fields[qualifications][' + index + '][enabled]'" value="1">
       <label for="'level' + index">Level</label>
-      <input id="'level' + index" :name="'fields[qualifications][' + index + '][fields][listTitle]'" v-model="item.listTitle">
+      <input id="'level' + index" :name="'fields[qualifications][' + index + '][fields][listTitle]'" v-model="item.listTitle" placeholder="National 5">
 
       <div v-for="(row,listIndex) in item.list" class="nested">
         <label :for="'subject'+ listIndex">Subject</label>
-        <input :id="'subject'+ listIndex" type="text" v-model="row.subject" :name="'fields[qualifications][' + index + '][fields][list]['+ listIndex + '][col1]'"><br>
+        <input :id="'subject'+ listIndex" type="text" placeholder="Computing" v-model="row.subject" :name="'fields[qualifications][' + index + '][fields][list]['+ listIndex + '][col1]'"><br>
         <label :for="'grade'+ listIndex">Grade</label>
-        <input :id="'grade'+ listIndex" type="text" v-model="row.grade" :name="'fields[qualifications][' + index + '][fields][list]['+ listIndex + '][col2]'">
+        <input :id="'grade'+ listIndex" type="text" placeholder="A" v-model="row.grade" :name="'fields[qualifications][' + index + '][fields][list]['+ listIndex + '][col2]'">
       </div>
       <button class="button" v-on:click.prevent="addSubject(index)">Add Subject</button>
 
@@ -128,24 +127,33 @@
   </div>
 
   <div class="left pad-m">
-    <p><span class="required">* Required</span></p>
-  </div>
-
-  <div>
     <h3>Industries</h3>
     <p>Select all industries below you would like your CV to be listed under</p>
     <select name="fields[industries][]" multiple>
-    {% for industry in craft.fields.getFieldByHandle("industries") %}
-      {% for options in industry %}
-        {% for option in options %}
-          <option value="{{ option.value }}" {% if entry is defined and option.value in entry.industries %}selected{% endif %}>{{ option.label }}</option>
+      {% for industry in craft.fields.getFieldByHandle("industries") %}
+        {% for options in industry %}
+          {% for option in options %}
+            <option value="{{ option.value }}" {% if entry is defined and option.value in entry.industries %}selected{% endif %}>{{ option.label }}</option>
+          {% endfor %}
         {% endfor %}
       {% endfor %}
-    {% endfor %}
     </select>
     {% if entry is defined %}
       {{ errorList(entry.getErrors('industries')) }}
     {% endif %}
+  </div>
+
+  <div class="left pad-m">
+    <h3>Private</h3>
+    <label class="pad-t-b">
+      Check this box to make CV private
+      <input type="hidden" name="enabled" value="1">
+      <input class="mar-t-b" type="checkbox" name="enabled" value="0">
+    </label>
+  </div>
+
+  <div class="left pad-m">
+    <p><span class="required">* Required</span></p>
   </div>
 
   <input class="button" type="submit" value="Publish">
