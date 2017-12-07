@@ -1,3 +1,5 @@
+@media only screen {
+
 html {
   background-color: darkgray;
 }
@@ -120,4 +122,5 @@ input, textarea {
 
 .not-logged-in {
   font-size: 1.6rem
+}
 }
