@@ -4,7 +4,7 @@
 
 {% block content %}
   {% if currentUser and currentUser.id == entry.author.id %}
-    <div class="left">
+    <div class="left hide-print">
       <a href="{{ entry.url }}/edit">Edit This CV</a>
     </div>
   {% endif %}
