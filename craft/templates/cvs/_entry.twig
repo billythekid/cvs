@@ -25,6 +25,7 @@
   {% endif %}
 
   {% if entry.education is not empty or entry.qualifications is not empty %}
+<hr>
     <h2>Education</h2>
 
     <h3>{{ entry.education }}</h3>
@@ -41,6 +42,7 @@
   {% endif %}
 
   {% if entry.workExperience|length >0 %}
+    <hr>
     <h2>Work Experience</h2>
 
 
@@ -52,6 +54,7 @@
   {% endif %}
 
   {% if entry.interests|length >0 %}
+  <hr>
     <h2>Interests</h2>
 
     <ul>
