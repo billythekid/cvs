@@ -5,8 +5,10 @@
     <h1>Homepage</h1>
     <h2>Read people's CVs</h2>
     <ul>
-      {% for cv in craft.entries.section('cvs') %}
-        <li><a href="{{ cv.url }}">{{ cv.title }}</a></li>
+      {% for entry in craft.entries.section('cvs').status(null) %}
+        {% if entry.enabled or currentUser.admin %}
+          <li><a href="{{ entry.url }}">{{ entry.title }}</a></li>
+        {% endif %}
       {% endfor %}
     </ul>
 

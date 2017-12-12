@@ -2,8 +2,17 @@
 
 {% requireLogin %}
 
+{% if entry is not defined %}
+  {% set entryslug = craft.request.getSegment(2) %}
+  {% set entry = craft.entries.section('cvs').slug(entryslug).status(null).first %}
+{% endif %}
+
+{% if not entry.enabled and currentUser and currentUser.id != entry.author.id and not currentUser.admin %}
+  {% exit 403 %}
+{% endif %}
+
 {% block content %}
-  {% if currentUser and currentUser.id == entry.author.id %}
+  {% if currentUser and currentUser.id == entry.author.id or currentUser.admin %}
     <div class="left hide-print">
       <a href="{{ entry.url }}/edit">Edit This CV</a>
     </div>
@@ -16,7 +25,9 @@
     {% if entry.mobile|length > 0 %}
       Mobile: {{ entry.mobile }}<br>
     {% endif %}
-    <span class="right">Email: {{ entry.email }}</span>
+    {% if entry.email|length > 0 %}
+      <span class="right">Email: {{ entry.email }}</span>
+    {% endif %}
   </p>
 
   {% if entry.personalStatement|length >0 %}

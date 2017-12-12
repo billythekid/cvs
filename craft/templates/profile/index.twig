@@ -15,7 +15,7 @@
       <h2>Your Cvs</h2>
       <ul>
         {% for cv in cvs %}
-          <li><a href="{{ cv.url }}">{{ cv.title }}</a></li>
+          <li><a href="{{ cv.url }}">{{ cv.title }}</a> ({{ cv.enabled ? "public" : "private" }})</li>
         {% endfor %}
       </ul>
     {% endif %}

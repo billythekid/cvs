@@ -15,7 +15,7 @@ return array(
         'enableCsrfProtection' => true,
         'omitScriptNameInUrls' => true,
         'cpTrigger'            => 'admin',
-        'devMode'              => false,
+        'devMode'              => true,
         'loginPath'            => 'login',
     ],
 );
